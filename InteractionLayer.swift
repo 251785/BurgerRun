@@ -12,19 +12,35 @@ class InteractionLayer : Layer, KeyDownHandler, KeyUpHandler {
     let hamburger = Hamburger()
     let burgerGuy = BurgerGuy(rect: Rect(size:Size(width: 50, height: 70)))
     let score = Score()
-
+ //   let P1position = burgerGuy.rectangle.rect.topLeft
+    
     func returnBurgerGuyRect() -> Rect {
         let rect = burgerGuy.returnRect()
         return rect
     }
     func done() {
         enemy.move(to: Point(x: 920, y: 480))
-        burgerGuy.move(to: Point(x: 20, y: 480))
+        burgerGuy.move(to: Point(x: 250, y: 480))
         
     }
     //    hamburger.done()
     
-    
+    func teleportUp() {
+            let P1position = burgerGuy.rectangle.rect.topLeft
+            burgerGuy.move(to: Point(x: P1position.x, y: P1position.y + 900))
+    }
+    func teleportDown() {
+            let P1position = burgerGuy.rectangle.rect.topLeft
+            burgerGuy.move(to: Point(x: P1position.x, y: P1position.y - 900))
+    }
+    func teleportLeft() {
+            let P1position = burgerGuy.rectangle.rect.topLeft
+            burgerGuy.move(to: Point(x: P1position.x + 1350, y: P1position.y))
+    }
+    func teleportRight() {
+            let P1position = burgerGuy.rectangle.rect.topLeft
+            burgerGuy.move(to: Point(x: P1position.x - 1350, y: P1position.y))
+    }
     
     init() {
 
@@ -37,7 +53,7 @@ class InteractionLayer : Layer, KeyDownHandler, KeyUpHandler {
 
     }
     override func preSetup(canvasSize: Size, canvas: Canvas) {
-        burgerGuy.move(to: Point(x: 20, y: canvasSize.center.y))
+        burgerGuy.move(to: Point(x: 250, y: canvasSize.center.y))
         dispatcher.registerKeyDownHandler(handler: self)
         dispatcher.registerKeyUpHandler(handler: self)
     }
