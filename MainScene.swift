@@ -17,6 +17,7 @@ class MainScene : Scene {
     let interactionLayer = InteractionLayer()
     let foregroundLayer = ForegroundLayer()
     let enemy = Enemy()
+    let background = Background()
     func returnBurgerGuyRect() -> Rect {
         let rect = interactionLayer.returnBurgerGuyRect()
         return rect
@@ -32,8 +33,10 @@ class MainScene : Scene {
         enemy.done()
     }
     
-    
-    
+    func backgroundRect() -> Rect {
+        let rect = background.backgroundRect()
+        return rect
+    }
     init() {
         // Using a meaningful name can be helpful for debugging
         super.init(name:"Main")
