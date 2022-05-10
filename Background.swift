@@ -27,6 +27,10 @@ class Background : RenderableEntity {
         // Using a meaningful name can be helpful for debugging
         super.init(name:"Background")
     }
+    func backgroundRect() -> Rect {
+        let fence = Rect(topLeft:Point(x:200, y:0), size:Size(width:1500, height:925))
+        return fence
+    }
 
 
     override func setup(canvasSize:Size, canvas:Canvas) {
