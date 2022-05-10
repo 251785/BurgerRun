@@ -25,6 +25,7 @@ class BurgerGuy: RenderableEntity {
         rectangle = Rectangle(rect: rect, fillMode:.fillAndStroke)
         super.init(name: "BurgerGuy")
     }
+    
 
     func returnRect() -> Rect {
         let rect = rectangle.rect
@@ -33,6 +34,30 @@ class BurgerGuy: RenderableEntity {
     override func setup(canvasSize:Size, canvas:Canvas) {
         canvas.setup(burger1)
         canvas.setup(burger2)
+    }
+    override func calculate(canvasSize:Size) {
+        guard let interaction = layer as? InteractionLayer else {
+            fatalError("Idiot")
+        }
+        guard let scene = scene as? MainScene else {
+            fatalError("Idiot")
+        }
+            let fence = scene.backgroundRect()
+            let rectangle = Rectangle(rect:fence, fillMode: .stroke)
+            let burgerGuyBounding = scene.returnBurgerGuyRect()
+            let rectangleContainment = burgerGuyBounding.containment(target:rectangle.rect)
+            if rectangleContainment.intersection([.overlapsTop]).isEmpty {
+                interaction.teleportUp()
+            }
+            if rectangleContainment.intersection([.overlapsBottom]).isEmpty {
+                interaction.teleportDown()
+            }
+            if rectangleContainment.intersection([.overlapsLeft]).isEmpty {
+                interaction.teleportLeft()
+            }
+            if rectangleContainment.intersection([.overlapsRight]).isEmpty {
+                interaction.teleportRight()
+            }
     }
 
     override func render(canvas: Canvas) {
